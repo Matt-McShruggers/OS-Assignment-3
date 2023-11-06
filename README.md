@@ -1,2 +1,12 @@
-# OS-Assignment-3
-Ambiente de computación distribuida
+# 🖥️ Asignación No. 3: Ambiente de computación distribuida 🖥️
+
+Este repositorio es un poco distinto al que se está acostumbrado. Esto se debe a que se trabajaron a lo largo de 3 máquinas virtuales, implementando un funcionamiento unido de los servicios Nginx, Apache, Docker-Compose y el framework Ray. Por ende, como la asignación fue dividida entre las partes del funcionamiento entre los servicios y la prueba del framework, se pueden considerar que son divididas en las carpetas *"Network_Topology"* y *"Ray_Framework"*.
+
+### << Parte 1: Network_Topology >> 
+- Dentro de la carpeta se encontrarán 3 carpetas, cada una con el nombre de la máquina virtual correspondiente a la que se trabajaron los archivos internos de cada servicio. En el caso de NGINX y para Apache en las otras 2, se hicieron archivos de Virtual Host que permitían configurar acordemente lo que se pedía. Cada uno de estos archivos lleva el modelo de nombre "**[nombre del servicio].conf**". La habilitación de estos se hace mediante una serie variada de comandos.
+- En el caso de la máquina virtual de Docker-Compose, para levantar programas es necesario de un archivo **docker-compose.yml** y consecuentemente **Dockerfile**, los cuales sirven para establecer la configuración deseada del programa. Para efectos de sencillez, el programa tiene el nombre de archivo **app.py**, y solo basta con estar en la carpeta y utilizar el comando `docker-compose up` en una instancia de la terminal (Tal como se muestra en el PDF) para activar la instancia de Docker-Compose.
+
+### << Parte 2: Ray_Framework >>
+Ray tiene la libertad de que puede correr en cualquier dispositivo que tenga soporte para Python 3.7 en adelante. La manera en la que funciona, es que permite la construcción de "clusters" de dispositivos, para así correr programas de Python escogiendo recursos distributivamente de los dispositivos conectados a este cluster. Entonces, vemos que el único archivo en esta carpeta es el programa en Python **programa_prueba.py**. Para utilizar el framework, se deben seguir los pasos:
+1) Desde el dispositivo que va a ser el centro/la cabeza de nodos, ejecutar el comando `ray start --head` en una terminal iniciará el cluster. En nuestro caso, utilizamos la máquina virtual *sisoper-apache* para ser la cabeza. Luego, para cada dispositivo que desée unirse al cluster `ray start --address=[head_IP]:6379`, donde "*head_IP*" es la IP del dispositivo que se inicializó como la cabeza de nodos.
+2) Añadiendo lineas extras al programa escrito en Python es necesario para que Ray pueda ejecutarlo de manera distribuida. Para correrlo en este caso, es tan simple como ejecutar el comando `python3.7 programa_prueba.py` en la terminal.
